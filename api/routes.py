@@ -7,7 +7,7 @@ from api.utils import *
 usr_token = "0706209ebda6cb2cb383ad9098d74cf01bf8ef1c6408a74672febdba90f6916c85264440a3cdb978ddfd3"
 
 
-def get_vk2(method, data):
+def work(method, data):
     
     #INIT
     full_request = {}
@@ -48,6 +48,6 @@ def vk_method(method):
         print(f"headers: {request.headers}")
         print(f"form: {request.form}")
 
-        return get_vk2(method, dict(request.form))
+        return work(method, dict(request.form))
     
     return requests.get(get_vk_requests_url(method, request.form)).json()

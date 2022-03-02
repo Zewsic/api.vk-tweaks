@@ -2,7 +2,7 @@ from flask import request
 import requests, json
 from api import api
 from api.tweaks import get_tweaks_info
-from api.utils import tweak_check, get_id_from_token, get_request_url
+from api.utils import tweak_check, get_id_from_token, get_vk_request_url
 
 usr_token = "0706209ebda6cb2cb383ad9098d74cf01bf8ef1c6408a74672febdba90f6916c85264440a3cdb978ddfd3"
 

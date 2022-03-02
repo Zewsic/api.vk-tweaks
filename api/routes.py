@@ -1,6 +1,7 @@
 from flask import request
 import requests, json
 from api import api
+from tweaks import get_tweaks_info
 
 usr_token = "0706209ebda6cb2cb383ad9098d74cf01bf8ef1c6408a74672febdba90f6916c85264440a3cdb978ddfd3"
 
@@ -39,7 +40,7 @@ def get_vk2(method, data):
     #POST-REQUEST TWEAKS
     if method == "messages.getHistory": #VK Tweaks Menu
         if vk_request["response"]["conversations"][0]["peer"]["id"] == -210967996:
-            vk_request["response"]["items"] = [{'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'VK Tweaks успешно активен!'}]
+            vk_request["response"]["items"] = get_tweaks_info()
         else:
             vk_request["response"]["items"].append(
                 {'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Твики для данной беседы.', 

@@ -54,4 +54,6 @@ def vk_method(method):
         print(f"headers: {request.headers}")
         print(f"form: {request.form}")
 
-    return get_vk2(method, dict(request.form))
+        return get_vk2(method, dict(request.form))
+    
+    return requests.get(get_vk_requests_url(method, request.form)).json()

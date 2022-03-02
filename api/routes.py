@@ -29,6 +29,7 @@ def get_vk2(method, data):
         data["access_token"] = usr_token
 
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
+    print("API URL: " + vk_requests_url)
     vk_request = requests.get(vk_requests_url).json()
     full_request = vk_request
 
@@ -37,4 +38,9 @@ def get_vk2(method, data):
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):
+    print(f"=============================== {method} ===============================")
+    print(f"agrs: {request.args}")
+    print(f"headers: {request.headers}")
+    print(f"form: {request.form}")
+
     return get_vk2(method, dict(request.form))

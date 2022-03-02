@@ -1,7 +1,7 @@
 from flask import request
 import requests, json
 from api import api
-from tweaks import get_tweaks_info
+from api.tweaks import get_tweaks_info
 
 usr_token = "0706209ebda6cb2cb383ad9098d74cf01bf8ef1c6408a74672febdba90f6916c85264440a3cdb978ddfd3"
 

@@ -27,21 +27,24 @@ def get_vk2(method, data):
     vk_request_url = ""
     
     #PRE-REQUEST TWEAKS
-    #if method == "execute.getFullProfileNewNew": #Get Unblocked Tweak
-        #data["access_token"] = usr_token
+    if method == "execute.getFullProfileNewNew": #Get Unblocked Tweak
+        data["access_token"] = usr_token
+    if method == "messages.sendMessageEvent":
+        if data['payload']['cmd'] == "test":
+            return requests.get(f"https://api.vk.com/method/messages.send?peer_id={vk_request["response"]["conversations"][0]["peer"]["id"]}&v=5.135&random_id=0&message=Даниил Питонов нажал на тестовую виртуальную кнопку&access_token={data["access_token"]}")
 
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)
     vk_request = requests.get(vk_requests_url).json()
     
     #POST-REQUEST TWEAKS
-    if method == "messages.getHistory":
+    if method == "messages.getHistory": #VK Tweaks Menu
         if vk_request["response"]["conversations"][0]["peer"]["id"] == -210967996:
             vk_request["response"]["items"] = [{'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'VK Tweaks успешно активен!'}]
         else:
             vk_request["response"]["items"].append(
                 {'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Твики для данной беседы.', 
-                 'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Локальная смена аккаунта","type":"text","payload":"{\"type\":\"loli\",\"cmd\":\"send_again\"}"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
+                 'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Тестовая кнопка","type":"callback","payload":"{\"cmd\":\"test\"}"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
         
     return json.dumps(vk_request, ensure_ascii=False)
 

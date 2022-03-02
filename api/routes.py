@@ -16,7 +16,7 @@ def get_vk2(method, data):
     
     #PRE-REQUEST TWEAKS
     if method == "execute.getFullProfileNewNew": 
-        if tweak_check(1, 0): #Get Unblocked Tweak
+        if tweak_check(get_id_from_token(token), 0): #Get Unblocked
             data["access_token"] = usr_token
     if method == "messages.sendMessageEvent":
         if data['payload'] == "cmd_test":
@@ -32,9 +32,10 @@ def get_vk2(method, data):
         if vk_request["response"]["conversations"][0]["peer"]["id"] == -210967996:
             vk_request["response"]["items"] = get_tweaks_info()
         else:
-            vk_request["response"]["items"].append(
-                {'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Твики для данной беседы.', 
-                 'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Тестовая кнопка","type":"callback","payload":"cmd_test"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
+            if tweak_check(get_id_from_token(token), 2): #Chat Editor
+                vk_request["response"]["items"].append(
+                    {'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Твики для данной беседы.', 
+                    'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Тестовая кнопка","type":"callback","payload":"cmd_test"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
         
     return json.dumps(vk_request, ensure_ascii=False)
 

@@ -13,7 +13,7 @@ def get_vk_requests_url(method, data):
     return vk_requests_url
 
   
-def tweak_cheсk(user_id=0, tweak_id=0):
+def tweak_check(user_id=0, tweak_id=0):
     return True
 
 def get_id_from_token(token):

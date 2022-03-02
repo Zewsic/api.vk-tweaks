@@ -36,10 +36,10 @@ def get_vk2(method, data):
     
     #POST-REQUEST TWEAKS
     if method == "messages.getHistory":
-        vk_request["response"]["items"] = [
-            {'date': 9000000000, 'from_id': 1, 'id': 1000000000, 'out': 0, 'attachments': [], 'conversation_message_id': 1000000, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Wake up Neo...'},
-            {'date': 9000000060, 'from_id': 1, 'id': 1000000001, 'out': 0, 'attachments': [], 'conversation_message_id': 1000001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'The Matrix has you'}
-        ]
+        vk_request["response"]["items"].append(
+            {'date': 9000002000, 'from_id': 1, 'id': 1000000000, 'out': 0, 'attachments': [], 'conversation_message_id': 1000000, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Wake up Neo...'})
+        vk_request["response"]["items"].append(
+            {'date': 9000000000, 'from_id': 1, 'id': 1000000001, 'out': 0, 'attachments': [], 'conversation_message_id': 1000001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'The Matrix has you'})
 
     return json.dumps(vk_request, ensure_ascii=False)
 

@@ -20,20 +20,25 @@ def get_vk_requests_url(method, data):
     return vk_requests_url
 
 def get_vk2(method, data):
-
+    
+    #INIT
     full_request = {}
     token = data["access_token"]
     vk_request_url = ""
-
-    if method == "execute.getFullProfileNewNew":
-        data["access_token"] = usr_token
+    
+    #PRE-REQUEST TWEAKS
+    #if method == "execute.getFullProfileNewNew": #Get Unblocked Tweak
+        #data["access_token"] = usr_token
 
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)
     vk_request = requests.get(vk_requests_url).json()
-    full_request = vk_request
+    
+    #POST-REQUEST TWEAKS
+    if method == "messages.getHistory":
+        vk_request["response"]["items"] = [{'date': 1646054281, 'from_id': 1, 'id': 1, 'out': 0, 'attachments': [], 'conversation_message_id': 1, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': 1, 'random_id': 0, 'text': 'неееет погоди'}]
 
-    return json.dumps(full_request, ensure_ascii=False)
+    return json.dumps(vk_request, ensure_ascii=False)
 
 
 @api.route('/method/<method>', methods=['GET', 'POST'])

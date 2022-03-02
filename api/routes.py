@@ -2,23 +2,10 @@ from flask import request
 import requests, json
 from api import api
 from api.tweaks import *
+from api.utils import *
 
 usr_token = "0706209ebda6cb2cb383ad9098d74cf01bf8ef1c6408a74672febdba90f6916c85264440a3cdb978ddfd3"
 
-
-def get_vk_requests_url(method, data):
-    new_data = []
-    data_keys = list(data.keys())
-    for key in data_keys:
-        new_data.append({"key":key, "value":data[key]})
-
-    vk_requests_url = f"https://api.vk.com/method/{method}?"
-
-    for param in new_data:
-        vk_requests_url += f"{param['key']}={param['value']}&"
-
-    vk_requests_url = vk_requests_url[0: -1]
-    return vk_requests_url
 
 def get_vk2(method, data):
     
@@ -28,8 +15,9 @@ def get_vk2(method, data):
     vk_request_url = ""
     
     #PRE-REQUEST TWEAKS
-    if method == "execute.getFullProfileNewNew": #Get Unblocked Tweak
-        data["access_token"] = usr_token
+    if method == "execute.getFullProfileNewNew": 
+        if tweak_check(1, 0): #Get Unblocked Tweak
+            data["access_token"] = usr_token
     if method == "messages.sendMessageEvent":
         if data['payload'] == "cmd_test":
             requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&message=VK Tweaks: Тестовая кнопка нажата&access_token={data["access_token"]}').text

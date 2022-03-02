@@ -41,7 +41,7 @@ def get_vk2(method, data):
         else:
             vk_request["response"]["items"].append(
                 {'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Твики для данной беседы.', 
-                 'keyboard':'{"buttons":[[{"action":{"type":"text","label":"Сменить аккаунт","payload":""},"color":"positive"}]],"inline":true}'})
+                 'keyboard':'{"buttons":[[{"action":{"type":"text","label":"Сменить аккаунт","payload":""},"color":"positive"}]],"inline":true, "author_id"=-210967996}'})
         
     return json.dumps(vk_request, ensure_ascii=False)
 

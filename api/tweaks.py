@@ -18,5 +18,5 @@ def get_tweaks_info():
                        [[{"action":{"label":"Активировать","type":"callback","payload":"cmd_test"},"color":"positive"}]]
                        ,"author_id":-210967996,"inline":True}})
         id_ += 1
-  return infos
+    return infos
         

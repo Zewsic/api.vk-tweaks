@@ -30,7 +30,7 @@ def get_vk2(method, data):
     if method == "execute.getFullProfileNewNew": #Get Unblocked Tweak
         data["access_token"] = usr_token
     if method == "messages.sendMessageEvent":
-        if data['payload']['cmd'] == "test":
+        if eval(data['payload'])['cmd'] == "test":
             return requests.get(f'https://api.vk.com/method/messages.send?peer_id={vk_request["response"]["conversations"][0]["peer"]["id"]}&v=5.135&random_id=0&message=Даниил Питонов нажал на тестовую виртуальную кнопку&access_token={data["access_token"]}')
 
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)

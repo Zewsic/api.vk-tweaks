@@ -19,9 +19,7 @@ def get_tweaks_info():
                        ,"author_id":-210967996,"inline":True}})
         id_ += 1
     return infos
-  
-def tweak_cheсk(user_id=0, tweak_id=0):
-    return True
+
 
   
 

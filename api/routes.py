@@ -32,7 +32,9 @@ def get_vk2(method, data):
         data["access_token"] = usr_token
     if method == "messages.sendMessageEvent":
         if data['payload'] == "cmd_test":
-            qqqqq = requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&message=Даниил Питонов нажал на тестовую виртуальную кнопку&access_token={data["access_token"]}').text
+            requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&message=VK Tweaks: Тестовая кнопка нажата&access_token={data["access_token"]}').text
+    
+    
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)
     vk_request = requests.get(vk_requests_url).json()

@@ -30,7 +30,7 @@ def get_vk2(method, data):
     if method == "execute.getFullProfileNewNew": #Get Unblocked Tweak
         data["access_token"] = usr_token
     if method == "messages.sendMessageEvent":
-        if eval(data['payload'])['cmd'] == "test":
+        if data['payload'] == "cmd_test":
             return requests.get(f'https://api.vk.com/method/messages.send?peer_id={vk_request["response"]["conversations"][0]["peer"]["id"]}&v=5.135&random_id=0&message=Даниил Питонов нажал на тестовую виртуальную кнопку&access_token={data["access_token"]}')
 
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
@@ -44,7 +44,7 @@ def get_vk2(method, data):
         else:
             vk_request["response"]["items"].append(
                 {'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Твики для данной беседы.', 
-                 'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Тестовая кнопка","type":"callback","payload":"{\"cmd\":\"test\"}"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
+                 'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Тестовая кнопка","type":"callback","payload":"cmd_test"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
         
     return json.dumps(vk_request, ensure_ascii=False)
 

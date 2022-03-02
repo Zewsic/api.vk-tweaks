@@ -20,7 +20,7 @@ def get_tweaks_info():
         id_ += 1
     return infos
   
-def tweak_cheak(user_id=0, tweak_id=0):
+def tweak_cheсk(user_id=0, tweak_id=0):
     return True
 
   

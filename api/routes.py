@@ -14,15 +14,8 @@ def work(method, data):
     token = data["access_token"]
     vk_request_url = ""
     
-    #PRE-REQUEST TWEAKS
-    if method == "execute.getFullProfileNewNew": 
-        if tweak_check(get_id_from_token(token), 0): #Get Unblocked
-            data["access_token"] = usr_token
-    if method == "messages.sendMessageEvent":
-        if data['payload'] == "cmd_test":
-            requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&message=VK Tweaks: Тестовая кнопка нажата&access_token={data["access_token"]}').text
     
-    
+    data = parse_preRequest(method, data)
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)
     vk_request = requests.get(vk_requests_url).json()

@@ -22,7 +22,7 @@ def work(method, data):
         from api.modules.execute_getFullProfileNewNew import __call__
         __call__(data)
     elif method == "messages.send":
-        text = data.get('message','')
+        text = data.get('message','').lower()
         if (text.startswith('.')):
             vm = data['message'].replace('.', "", 1).strip()
             print(vm)
@@ -40,7 +40,7 @@ def work(method, data):
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)
     vk_request = requests.get(vk_requests_url).json()
-    
+    print(vk_request)
     #POST-REQUEST TWEAKS
     if method == "messages.getHistory": #VK Tweaks Menu
         if vk_request["response"]["conversations"][0]["peer"]["id"] == -210967996:

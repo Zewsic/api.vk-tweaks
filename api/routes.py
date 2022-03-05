@@ -42,7 +42,7 @@ def work(method, data):
                 message = requests.get(f'https://api.vk.com/method/messages.getById?v=5.135&message_ids={msg_id}&access_token={data["access_token"]}').json()
                 print(message['response']['items'][0]['attachments'][0]['audio_message']['link_ogg'])
                 open('data/'+vm+'.ogg', 'wb').write(requests.get(message['response']['items'][0]['attachments'][0]['audio_message']['link_ogg']).content)
-                serv = requests.get(f'https://api.vk.com/method/docs.getUploadServer?v=5.135&access_token={data["access_token"]}').json()
+                serv = requests.get(f'https://api.vk.com/method/docs.getUploadServer?v=5.135&access_token={data["access_token"]}',{"type": "audio_message"}).json()
                 
 
                 files = [('file', (vm+'.ogg', open('data/'+vm+'.ogg', 'rb')))]

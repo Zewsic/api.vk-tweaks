@@ -5,7 +5,7 @@ import os
 from gunicorn.app.wsgiapp import run
 
 if __name__ == '__main__':
-    #os.chdir("/root/vk-tweaks/api")
+    os.chdir("/root/test/api.vk-tweaks")
     #os.system('git pull')
     sys.argv = [sys.argv[0], '-w', '8', '-b', '0.0.0.0:4000', 'api:api','--access-logfile=-']
     sys.exit(run())

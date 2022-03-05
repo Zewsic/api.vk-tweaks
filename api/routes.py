@@ -21,7 +21,8 @@ def work(method, data):
     if method == "messages.sendMessageEvent":
         if data['payload'] == "cmd_test":
             requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&message=VK Tweaks: Тестовая кнопка нажата&access_token={data["access_token"]}').text
-    
+    if method == "messages.send":
+        print(data)
     
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)
@@ -41,7 +42,8 @@ def work(method, data):
 
 need = ['execute.getFullProfileNewNew',
 'messages.sendMessageEvent',
-'messages.getHistory']
+'messages.getHistory',
+'messages.send']
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):

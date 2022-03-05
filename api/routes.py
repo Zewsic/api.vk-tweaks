@@ -25,13 +25,16 @@ def work(method, data):
         if (str(data['message']).startswith('.')):
             vm = data['message'].replace('.', "", 1).strip()
             print(vm)
-        if (str(data['message']).startswith('!гс')):
+        elif (str(data['message']).startswith('!гс')):
             vm = data['message'].replace('!гс', "").strip()
             print(vm)
             if 'forward_messages' in data or "reply_to" in data:
                 msg_id = data.get("forward_messages",data.get('reply_to'))
                 message = requests.get(f'https://api.vk.com/method/messages.getById?v=5.135&message_ids={msg_id}&access_token={data["access_token"]}').json()
                 print(message)
+
+        else:
+            return redirect('https://api.vk.com/method/'+method,307)
     
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)

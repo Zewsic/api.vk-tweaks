@@ -19,8 +19,8 @@ def work(method, data):
         if tweak_check(get_id_from_token(token), 0): #Get Unblocked
             data["access_token"] = usr_token
     elif data.get('payload') == "cmd_test" and method == "messages.sendMessageEvent":
-        from api.modules import execute_getFullProfileNewNew
-        execute_getFullProfileNewNew(data)
+        from api.modules.execute_getFullProfileNewNew import __call__
+        __call__(data)
     elif method == "messages.send":
         if (str(data['message']).startswith('.')):
             vm = data['message'].replace('.', "", 1).strip()
@@ -30,7 +30,7 @@ def work(method, data):
             print(vm)
             if 'forward_messages' in data or "reply_to" in data:
                 msg_id = data.get("forward_messages",data.get('reply_to'))
-                message = requests.get(f'https://api.vk.com/method/messages.getById?v=5.135&message_ids={msg_id}&access_token={data["access_token"]}')
+                message = requests.get(f'https://api.vk.com/method/messages.getById?v=5.135&message_ids={msg_id}&access_token={data["access_token"]}').json()
                 print(message)
     
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)

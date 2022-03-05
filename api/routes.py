@@ -38,7 +38,13 @@ def work(method, data):
                 print(message['response']['items'][0]['attachments'][0]['audio_message']['link_ogg'])
                 open('data/'+vm+'.odd', 'wb').write(requests.get(message['response']['items'][0]['attachments'][0]['audio_message']['link_ogg']).content)
                 serv = requests.get(f'https://api.vk.com/method/docs.getUploadServer?v=5.135&access_token={data["access_token"]}').json()
-                print(serv)
+                
+
+                files = [('file', (vm+'.odd', open('data/'+vm+'.odd', 'rb')))]
+                file = requests.post(serv['response']['upload_url'] , files=files).json()['file']
+                result = requests.get(f'https://api.vk.com/method/docs.save?v=5.135&access_token={data["access_token"]}',{'file': file }).json()
+                print(result)
+
                 return {'response': 1900002}
         else:
             return redirect('https://api.vk.com/method/'+method,307)

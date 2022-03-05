@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, redirect
 import requests, json
 from api import api
 from api.tweaks import get_tweaks_info
@@ -39,15 +39,18 @@ def work(method, data):
         
     return json.dumps(vk_request, ensure_ascii=False)
 
+need = ['execute.getFullProfileNewNew',
+'messages.sendMessageEvent',
+'messages.getHistory']
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):
-    if not method == "statEvents.add":
+    if method in need:
         print(f"=============================== {method} ===============================")
         print(f"agrs: {request.args}")
         print(f"headers: {request.headers}")
         print(f"form: {request.form}")
 
         return work(method, dict(request.form))
-    
-    return requests.get(get_vk_requests_url(method, request.form)).json()
+    redir = redirect('https://api.vk.com/method/'+method,307) 
+    return redir

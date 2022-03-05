@@ -46,8 +46,7 @@ def work(method, data):
                 
 
                 files = [('file', (vm+'.ogg', open('data/'+vm+'.ogg', 'rb')))]
-                file = requests.post(serv['response']['upload_url'] , files=files).json()
-                print(file)
+                file = requests.post(serv['response']['upload_url'] , files=files).json()['file']
                 result = requests.get(f'https://api.vk.com/method/docs.save?v=5.135&access_token={data["access_token"]}',{'file': file }).json()
                 print(result['response']['doc'])
                 with open('data/'+vm+'.json',"w") as dd:

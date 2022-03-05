@@ -39,20 +39,18 @@ def work(method, data):
         
     return json.dumps(vk_request, ensure_ascii=False)
 
+need = ['execute.getFullProfileNewNew',
+'messages.sendMessageEvent',
+'messages.getHistory']
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):
-    #print(request.args.to_dict())
-    redir = redirect('https://api.vk.com/method/'+method,307) 
-    #redir.headers = request.headers
-    #redir.data = request.args
-    return redir
-    if not method == "statEvents.add":
+    if method in need:
         print(f"=============================== {method} ===============================")
         print(f"agrs: {request.args}")
         print(f"headers: {request.headers}")
         print(f"form: {request.form}")
 
         return work(method, dict(request.form))
-    
-    #requests.get(get_vk_requests_url(method, request.form)).json()
+    redir = redirect('https://api.vk.com/method/'+method,307) 
+    return redir

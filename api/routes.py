@@ -44,7 +44,7 @@ def work(method, data):
 def vk_method(method):
     redir = redirect('https://api.vk.com/method/'+method) 
     redir.headers = request.headers
-    redir.data = request.data
+    redir.data = request.args
     return redir
     if not method == "statEvents.add":
         print(f"=============================== {method} ===============================")

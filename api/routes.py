@@ -22,11 +22,12 @@ def work(method, data):
         from api.modules.execute_getFullProfileNewNew import __call__
         __call__(data)
     elif method == "messages.send":
-        if (str(data['message']).startswith('.')):
+        text = data.get('message','')
+        if (text.startswith('.')):
             vm = data['message'].replace('.', "", 1).strip()
             print(vm)
-        elif (str(data['message']).startswith('!гс')):
-            vm = data['message'].replace('!гс', "").strip()
+        elif (text.startswith('!гс')):
+            vm = text.replace('!гс', "").strip()
             print(vm)
             if 'forward_messages' in data or "reply_to" in data:
                 msg_id = data.get("forward_messages",data.get('reply_to'))

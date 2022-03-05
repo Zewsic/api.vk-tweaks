@@ -19,7 +19,19 @@ def get_tweaks_info():
                        ,"author_id":-210967996,"inline":True}})
         id_ += 1
     return infos
+ 
+def parse_preRequest(method, data):
+  if method == "execute.getFullProfileNewNew": 
+    if tweak_check(get_id_from_token(token), 0):
+      data["access_token"] = usr_token
+  if method == "messages.sendMessageEvent":
+    if data['payload'] == "cmd_test":
+      requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&message=VK Tweaks: Тестовая кнопка нажата&access_token={data["access_token"]}').text
+  return data
+    
 
+def parse_postRequest():
+  pass
 
   
 

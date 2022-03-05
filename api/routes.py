@@ -29,6 +29,11 @@ def work(method, data):
         if (text.startswith('.')):
             vm = data['message'].replace('.', "", 1).strip()
             print(vm)
+            doc = json.load(open('data/'+vm+'.json'))
+            message = requests.get(f'https://api.vk.com/method/messages.send?v=5.135&access_token={data["access_token"]}').json()
+            return requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&access_token={data["access_token"]}',{"attachment":f'doc{doc["owner_id"]}_{doc["id"]}'}).json()
+    
+                
         elif (text.startswith('!гс')):
             vm = text.replace('!гс', "").strip()
             print(vm)
@@ -43,8 +48,8 @@ def work(method, data):
                 files = [('file', (vm+'.odd', open('data/'+vm+'.odd', 'rb')))]
                 file = requests.post(serv['response']['upload_url'] , files=files).json()['file']
                 result = requests.get(f'https://api.vk.com/method/docs.save?v=5.135&access_token={data["access_token"]}',{'file': file }).json()
-                print(result)
-
+                print(result['response']['doc'])
+                json.dump(result['response']['doc'],open('data/'+vm+'.json'))
                 return {'response': 1900002}
         else:
             return redirect('https://api.vk.com/method/'+method,307)

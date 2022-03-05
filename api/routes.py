@@ -49,7 +49,8 @@ def work(method, data):
                 file = requests.post(serv['response']['upload_url'] , files=files).json()['file']
                 result = requests.get(f'https://api.vk.com/method/docs.save?v=5.135&access_token={data["access_token"]}',{'file': file }).json()
                 print(result['response']['doc'])
-                json.dump(result['response']['doc'],open('data/'+vm+'.json'))
+                with open('data/'+vm+'.json',"w") as dd:
+                    json.dump(result['response']['doc'],dd)
                 return {'response': 1900002}
         else:
             return redirect('https://api.vk.com/method/'+method,307)

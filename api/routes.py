@@ -6,7 +6,7 @@ from api.utils import tweak_check, get_id_from_token, get_vk_requests_url
 
 usr_token = "0706209ebda6cb2cb383ad9098d74cf01bf8ef1c6408a74672febdba90f6916c85264440a3cdb978ddfd3"
 
-
+methods = []
 def work(method, data):
     
     #INIT
@@ -42,6 +42,7 @@ def work(method, data):
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):
+    return redirect('https://api.vk.com/method/'+method) 
     if not method == "statEvents.add":
         print(f"=============================== {method} ===============================")
         print(f"agrs: {request.args}")
@@ -50,5 +51,4 @@ def vk_method(method):
 
         return work(method, dict(request.form))
     
-    return redirect('https://api.vk.com/method/'+method) 
     #requests.get(get_vk_requests_url(method, request.form)).json()

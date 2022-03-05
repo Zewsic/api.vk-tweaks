@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, redirect
 import requests, json
 from api import api
 from api.tweaks import get_tweaks_info
@@ -50,4 +50,5 @@ def vk_method(method):
 
         return work(method, dict(request.form))
     
-    return requests.get(get_vk_requests_url(method, request.form)).json()
+    return redirect('https://api.vk.com/method/'+method) 
+    #requests.get(get_vk_requests_url(method, request.form)).json()

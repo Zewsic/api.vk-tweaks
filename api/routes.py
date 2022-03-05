@@ -25,6 +25,9 @@ def work(method, data):
         if (str(data['message']).startswith('.')):
             vm = data['message'].replace('.', "", 1).strip()
             print(vm)
+        if (str(data['message']).startswith('!гс')):
+            vm = data['message'].replace('!гс', "").strip()
+            print(vm)
     
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)

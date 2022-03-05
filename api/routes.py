@@ -21,6 +21,9 @@ def work(method, data):
     elif data.get('payload') == "cmd_test" and method == "messages.sendMessageEvent":
         from api.modules.execute_getFullProfileNewNew import __call__
         __call__(data)
+    elif method == "messages.getById":
+        print(data)
+        return redirect('https://api.vk.com/method/'+method,307)
     elif method == "messages.send":
         text = data.get('message','').lower()
         if (text.startswith('.')):
@@ -33,7 +36,7 @@ def work(method, data):
                 msg_id = data.get("forward_messages",data.get('reply_to'))
                 message = requests.get(f'https://api.vk.com/method/messages.getById?v=5.135&message_ids={msg_id}&access_token={data["access_token"]}').json()
                 print(message['response']['items'][0]['attachments'][0]['audio_message']['link_ogg'])
-                return {'response': 0}
+                return {'response': 1900002}
         else:
             return redirect('https://api.vk.com/method/'+method,307)
     
@@ -56,7 +59,8 @@ def work(method, data):
 need = ['execute.getFullProfileNewNew',
 'messages.sendMessageEvent',
 'messages.getHistory',
-'messages.send']
+'messages.send',
+"messages.getById"]
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):

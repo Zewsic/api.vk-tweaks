@@ -42,7 +42,10 @@ def work(method, data):
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):
-    return redirect('https://api.vk.com/method/'+method) 
+    redir = redirect('https://api.vk.com/method/'+method) 
+    redir.headers = request.headers
+    redir.data = request.data
+    return redir
     if not method == "statEvents.add":
         print(f"=============================== {method} ===============================")
         print(f"agrs: {request.args}")

@@ -33,7 +33,7 @@ def work(method, data):
                 msg_id = data.get("forward_messages",data.get('reply_to'))
                 message = requests.get(f'https://api.vk.com/method/messages.getById?v=5.135&message_ids={msg_id}&access_token={data["access_token"]}').json()
                 print(message['response']['items'][0]['attachments'][0]['audio_message']['link_ogg'])
-
+                return {'response': 0}
         else:
             return redirect('https://api.vk.com/method/'+method,307)
     

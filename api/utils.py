@@ -14,7 +14,7 @@ def get_vk_requests_url(method, data):
 
   
 def tweak_check(user_id=0, tweak_id=0):
-    return True
+    return not tweak_id == 1
 
 def get_id_from_token(token):
     return 1

@@ -1,4 +1,4 @@
-from api.tweaks_list import GetUnblocked
+from api.tweaks_list import *
 from api.utils import *
 import requests
 
@@ -28,7 +28,7 @@ def get_tweaks_info(token):
 def parse_preRequest(method, data, token):
   if method == "execute.getFullProfileNewNew": 
     if tweak_check(get_id_from_token(token), 0):
-      data = getUnblocked.execute(data)
+      data = GetUnblocked.execute(data)
   if method == "messages.sendMessageEvent":
     requests.get(f'https://api.vk.com/method/messages.send?peer_id={data["peer_id"]}&v=5.135&random_id=0&message=VK Tweaks Callback: {data["payload"]}&access_token={data["access_token"]}').text
   return data

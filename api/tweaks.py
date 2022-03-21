@@ -13,7 +13,7 @@ def get_tweaks_info(token):
     infos = []
     id_ = 0
     for tweak in tweaks:
-        lb, pl, cl = "Деактивировать", "tweak_off", "negative" if tweak_check(get_id_from_token(token), id_) else "Активировать", "tweak_on", "positive"
+        lb, pl, cl = ("Деактивировать", "tweak_off", "negative") if tweak_check(get_id_from_token(token), id_) else ("Активировать", "tweak_on", "positive")
         infos.append({'date': 9000000000, 'from_id': -210967996, 'id': 1900001+id_, 'out': 0, 'attachments': [],
            'conversation_message_id': 1900001+id_, 'fwd_messages': [], 'important': False, 'is_hidden': False, 
            'peer_id': -210967996, 'random_id': 0, 

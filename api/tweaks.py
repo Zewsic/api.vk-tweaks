@@ -1,5 +1,5 @@
-from tweaks import *
-from utils import *
+from api.tweaks import *
+from api.utils import *
 
 tweaks = [
   {"name":"GetUnblocked", "desk":"Позволяет вам просматривать страницы пользователей, если они вас заблокировали.", "author":"Zewsic", "uses":"0", "ver":"1.0 BETA"}

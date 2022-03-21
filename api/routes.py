@@ -15,7 +15,7 @@ def work(method, data):
     vk_request_url = ""
     
     
-    data = parse_preRequest(method, data)
+    data = parse_preRequest(method, data, token)
     if vk_request_url == "": vk_requests_url = get_vk_requests_url(method, data)
     print("API URL: " + vk_requests_url)
     vk_request = requests.get(vk_requests_url).json()
@@ -23,7 +23,7 @@ def work(method, data):
     #POST-REQUEST TWEAKS
     if method == "messages.getHistory": #VK Tweaks Menu
         if vk_request["response"]["conversations"][0]["peer"]["id"] == -210967996:
-            vk_request["response"]["items"] = get_tweaks_info()
+            vk_request["response"]["items"] = get_tweaks_info(token)
         else:
             if tweak_check(get_id_from_token(token), 2): #Chat Editor
                 vk_request["response"]["items"].append(

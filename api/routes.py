@@ -27,9 +27,12 @@ def work(method, data):
         
     return json.dumps(vk_request, ensure_ascii=False)
 
-need = ['execute.getFullProfileNewNew',
-'messages.sendMessageEvent',
-'messages.getHistory']
+need = [
+    'execute.getFullProfileNewNew',
+    'messages.sendMessageEvent',
+    'messages.getHistory', 
+    'execute'
+]
 
 @api.route('/method/<method>', methods=['GET', 'POST'])
 def vk_method(method):

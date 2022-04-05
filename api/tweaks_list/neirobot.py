@@ -21,7 +21,7 @@ def execute(vk_request):
   lst_f = lst['from_id']
   
   rps = eval(str(requests.post('https://pelevin.gpt.dobro.ai/generate/', headers=headers, data=json.dumps({"prompt":lst_t,"length":30})).text))["replies"]
-  lst["keyboard"] = {"one_time":True,"buttons":[[{"action":{"label":rp.split("Сообщение: " + lst["text"] + "\nОтвет: ")[1],"type":"text"},"color":"secondary"}] for rp in rps],"author_id":lst_f, "inline":False}
+  lst["keyboard"] = {"one_time":True,"buttons":[[{"action":{"label":rp,"type":"text"},"color":"secondary"}] for rp in rps],"author_id":lst_f, "inline":False}
   
   vk_request["response"]["items"][0] = lst
   return vk_request

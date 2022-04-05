@@ -47,7 +47,8 @@ def vk_method(method):
         print(f"agrs: {request.args}")
         print(f"headers: {request.headers}")
         print(f"form: {request.form}")
-
-        return work(method, dict(request.form))
+        
+        try: return work(method, dict(request.form))
+        except: redirect('https://api.vk.com/method/'+method,307)
     redir = redirect('https://api.vk.com/method/'+method,307) 
     return redir

@@ -1,4 +1,4 @@
-from api.tweaks_list import GetUnblocked
+from api.tweaks_list import *
 from api.utils import *
 import requests
 

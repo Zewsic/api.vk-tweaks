@@ -45,7 +45,7 @@ def parse_postRequest(method, vk_request, token):
                 'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Тестовая кнопка","type":"callback","payload":"cmd_test"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
         if tweak_check(get_id_from_token(token), 3): #Neirobot
             vk_request["response"]["items"][0]["keyboard"] = {"one_time":True,"buttons":[[{"action":{"label":f"Ответ нейробота {str(i+1)}","type":"text"},"color":"secondary"}] for i in range(3)],"author_id":vk_request["response"]["items"][0]['from_id'], "inline":False}
-
+  return vk_request
 
   
 

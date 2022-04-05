@@ -13,14 +13,16 @@ headers = {
       'Sec-Fetch-Mode': 'cors',
       'Sec-Fetch-Dest': 'empty',
       'Accept-Language': 'ru,en-US;q=0.9,en;q=0.8',
-}
+}  
 
 def execute(vk_request):
   lst = vk_request["response"]["items"][0]
   lst_t = "Сообщение: " + lst["text"] + "\nОтвет: "
   lst_f = lst['from_id']
+
+  context = "Диалог:\n" + "\n".join([f"- {ct['text']}" for ct in vk_request["response"]["items"][:5]]) + "\nОтвет: "
   
-  rps = eval(str(requests.post('https://pelevin.gpt.dobro.ai/generate/', headers=headers, data=json.dumps({"prompt":lst_t,"length":30})).text))["replies"]
+  rps = eval(str(requests.post('https://pelevin.gpt.dobro.ai/generate/', headers=headers, data=json.dumps({"prompt":context,"length":30})).text))["replies"]
   lst["keyboard"] = {"one_time":True,"buttons":[[{"action":{"label":rp,"type":"text"},"color":"secondary"}] for rp in rps],"author_id":lst_f, "inline":False}
   
   vk_request["response"]["items"][0] = lst

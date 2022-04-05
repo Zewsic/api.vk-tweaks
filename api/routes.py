@@ -30,7 +30,7 @@ def work(method, data):
                     {'date': 9000000000, 'from_id': -210967996, 'id': 1900001, 'out': 0, 'attachments': [], 'conversation_message_id': 1900001, 'fwd_messages': [], 'important': False, 'is_hidden': False, 'peer_id': vk_request["response"]["conversations"][0]["peer"]["id"], 'random_id': 0, 'text': 'Твики для данной беседы.', 
                     'keyboard':{"one_time":False,"buttons":[[{"action":{"label":"Тестовая кнопка","type":"callback","payload":"cmd_test"},"color":"positive"}]],"author_id":-210967996,"inline":True}})
             if tweak_check(get_id_from_token(token), 3): #Neirobot
-                vk_request["response"]["items"][0]["keyboard"] = {"one_time":True,"buttons":[[{"action":{"label":"Ответ нейробота 1","type":"text"},"color":"secondary"}]],"author_id":vk_request["response"]["items"][0]['from_id'], "inline":False}
+                vk_request["response"]["items"][0]["keyboard"] = {"one_time":True,"buttons":[[{"action":{"label":f"Ответ нейробота {str(i+1)}","type":"text"},"color":"secondary"}] for i in range(5)],"author_id":vk_request["response"]["items"][0]['from_id'], "inline":False}
                 
     return json.dumps(vk_request, ensure_ascii=False)
 

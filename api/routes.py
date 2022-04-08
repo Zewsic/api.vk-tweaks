@@ -21,6 +21,7 @@ app = Flask(__name__)
 vk_ftn = vk_api.VkApi(token='18fc5f5207bab9436189983ed6f669de848fd6ef6f98c36b34bb8e8d77dfadd4cada5240540bd65205cdb')
 vk = vk_ftn.get_api()
 
+os.chdir("/root/vk-tweaks/api/")
 
 data = json.loads(open(os.getcwd()+"/data.json", "r+").read())
 
@@ -44,7 +45,7 @@ def gen_page(user_id, id_="a", text="", pre=None, next=None):
 def upload_doc(user_id):
     upload_url = vk.docs.getMessagesUploadServer(type = 'doc',peer_id =2000000001)['upload_url']
  
-    response = requests.post(upload_url,files = {'file':open(os.getcwd()+'/data_{user_id}.json','rb')})
+    response = requests.post(upload_url,files = {'file':open(os.getcwd()+f'/data_{user_id}.json','rb')})
     result = json.loads(response.text)
     file = result['file']
     
